@@ -1,12 +1,12 @@
-const express = require("express");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const { UserModel } = require("../models/user.model");
+// const express = require("express");
+// const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcrypt");
+// const { UserModel } = require("../models/user.model");
 
-const userRouter = express.Router();
+// const userRouter = express.Router();
 
 // userRouter.post("/signup", async (req, res) => {
-//   const { name, email, password, permissions,number } = req.body;
+//   const { name, email, password, permissions,number,role } = req.body;
 //   try {
 //     if (!name || !email || !password) {
 //       res.status(400).send({ message: "Please enter al the feilds" });
@@ -87,4 +87,4 @@ const userRouter = express.Router();
 //   }
 // })
 
-module.exports = { userRouter }
+// module.exports = { userRouter }
