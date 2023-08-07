@@ -21,7 +21,7 @@ app.get("/",(req,res)=>{
 
 app.use("/user",userRouter)
 
-// app.use("/data",dataRouter);
+app.use("/data",dataRouter);
 
 app.use("/uploads",express.static("uploads"))
 
