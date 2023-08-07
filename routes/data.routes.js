@@ -12,7 +12,6 @@ dataRouter.get("/",async(req,res)=>{
     }catch(err){
         res.send({"err":err.message})
     }
-    
 })
 
 dataRouter.post("/create",async(req,res)=>{
@@ -24,6 +23,7 @@ dataRouter.post("/create",async(req,res)=>{
         res.send({"err":err.message})
     }
 })
+
 
 dataRouter.patch("/update/:id",async(req,res)=>{
     const {id}=req.params;
