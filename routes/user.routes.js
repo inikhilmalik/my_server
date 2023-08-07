@@ -60,31 +60,31 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
-// userRouter.get("/getUsers", async (req, res) => {
-//   try {
-//     const users = await UserModel.find();
-//     if (!users) {
-//       return res.status(200).send({ message: "no users" });
-//     }
+userRouter.get("/getUsers", async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    if (!users) {
+      return res.status(200).send({ message: "no users" });
+    }
 
-//     res.status(200).send(users);
+    res.status(200).send(users);
 
-//   } catch (error) {
-//     res.status(400).send({
-//       message: "Something went wrong. Please try again later.",
-//     });
-//   }
-// });
+  } catch (error) {
+    res.status(400).send({
+      message: "Something went wrong. Please try again later.",
+    });
+  }
+});
 
-// userRouter.patch("/updatePermission/:id",async(req,res)=>{
-//   const {id}=req.params;
-//   // console.log(id)
-//   try{
-//       await UserModel.findByIdAndUpdate({_id:id},req.body);
-//       res.send("data is updated")
-//   }catch(err){
-//       res.send({"err":err.message})
-//   }
-// })
+userRouter.patch("/updatePermission/:id",async(req,res)=>{
+  const {id}=req.params;
+  // console.log(id)
+  try{
+      await UserModel.findByIdAndUpdate({_id:id},req.body);
+      res.send("data is updated")
+  }catch(err){
+      res.send({"err":err.message})
+  }
+})
 
 module.exports = { userRouter }
