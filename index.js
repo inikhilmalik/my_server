@@ -19,7 +19,7 @@ app.get("/",(req,res)=>{
     res.send("Homepage")
 })
 
-// app.use("/user",userRouter)
+app.use("/user",userRouter)
 
 app.use("/data",dataRouter);
 
