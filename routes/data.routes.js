@@ -12,6 +12,7 @@ dataRouter.get("/",async(req,res)=>{
     }catch(err){
         res.send({"err":err.message})
     }
+    
 })
 
 dataRouter.post("/create",async(req,res)=>{
