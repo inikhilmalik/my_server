@@ -4,6 +4,7 @@ const { dataRouter } = require("./routes/data.routes");
 const app=express();
 const cors=require("cors");
 const { userRouter } = require("./routes/user.routes");
+const { projectRouter } = require("./routes/project.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -20,6 +21,8 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/user",userRouter)
+
+app.use("/project",projectRouter)
 
 app.use("/data",dataRouter);
 
