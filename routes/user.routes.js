@@ -87,4 +87,15 @@ userRouter.patch("/updatePermission/:id",async(req,res)=>{
   }
 })
 
+userRouter.delete("/deleteMember/:id",async(req,res)=>{
+  const {id}=req.params;
+  // console.log(id)
+  try{
+      await UserModel.findByIdAndDelete({_id:id});
+      res.send("member is deleted")
+  }catch(err){
+      res.send({"err":err.message})
+  }
+})
+
 module.exports = { userRouter }
