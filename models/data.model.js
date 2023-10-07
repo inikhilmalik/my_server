@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
 
 const dataSchema = mongoose.Schema({
-    row: Number,
+    row: String,
     category: String,
     priority: String,
     activity: String,
     planned: Number,
     startDate: String,
     endDate: String,
-    dependOn: Number,
-    precurserTask: String,
+    dependOn: String,
     status: String,
     taskOwner: String,
     vendor: String,
