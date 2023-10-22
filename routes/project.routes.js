@@ -14,9 +14,11 @@ projectRouter.post("/create",async(req,res)=>{
     }
 })
 
-projectRouter.get("/",async(req,res)=>{
+projectRouter.get("/:id",async(req,res)=>{
+    const {id}=req.params
+    console.log(id)
     try{
-        const data=await ProjectModal.find();
+        const data=await ProjectModal.find({_id:id});
         res.send(data)
     }catch(err){
         res.send({"err":err.message})
