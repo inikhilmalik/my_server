@@ -16,7 +16,8 @@ const dataSchema = mongoose.Schema({
     actualDays:Number,
     zone:String,
     location:String,
-    images: [{ pic: String, action: Boolean }]
+    images: [{ pic: String, action: Boolean }],
+    projectID:String
 }, {
     versionKey: false
 })
