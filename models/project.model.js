@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const projectSchema = mongoose.Schema({
     projectName: String,
-    startDate: String,
-    endDate: String,
-    totalDays: Number,
-    categoryName: [],
     vendorName: [],
     adminID:String
 }, {
