@@ -5,9 +5,12 @@ const { dataModal } = require("../models/data.model");
 
 const dataRouter=express.Router();
 
-dataRouter.get("/",async(req,res)=>{
+dataRouter.get("/:id",async(req,res)=>{
+    const {id}=req.params;
+    console.log(id,"id")
     try{
-        const data=await dataModal.find();
+        const data=await dataModal.find({projectID:id});
+        console.log(data,"data")
         res.send(data)
     }catch(err){
         res.send({"err":err.message})
