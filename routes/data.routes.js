@@ -7,10 +7,10 @@ const dataRouter=express.Router();
 
 dataRouter.get("/:id",async(req,res)=>{
     const {id}=req.params;
-    console.log(id,"id")
+    // console.log(id,"id")
     try{
         const data=await dataModal.find({projectID:id});
-        console.log(data,"data")
+        // console.log(data,"data")
         res.send(data)
     }catch(err){
         res.send({"err":err.message})
@@ -39,10 +39,12 @@ dataRouter.patch("/update/:id",async(req,res)=>{
     }
 })
 
-dataRouter.post("/updateData",async(req,res)=>{
-    // console.log(req.body)
+dataRouter.post("/updateData/:id",async(req,res)=>{
+    const {id}=req.params;
+    console.log(id)
+    console.log(req.body,"body/....../")
     try{
-        await dataModal.deleteMany({})
+        await dataModal.deleteMany({projectID:id})
         await dataModal.insertMany(req.body);
         res.send("updation")
     }catch(err){
