@@ -19,7 +19,19 @@ projectRouter.get("/:id",async(req,res)=>{
     console.log(id)
     try{
         const data=await ProjectModal.find({adminID:id});
-        console.log(data)
+        // console.log(data)
+        res.send(data)
+    }catch(err){
+        res.send({"err":err.message})
+    }
+})
+
+projectRouter.get("single/:id",async(req,res)=>{
+    const {id}=req.params
+    console.log(id)
+    try{
+        const data=await ProjectModal.find({_id:id});
+        // console.log(data)
         res.send(data)
     }catch(err){
         res.send({"err":err.message})

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const projectSchema = mongoose.Schema({
     projectName: String,
-    vendorName: [],
+     vendorName: [],
     adminID:String
 }, {
     versionKey: false
