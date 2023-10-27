@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: true },
     number:{type:Number},
     role:{type:String},
+    projects:[],
     permissions:[]
   },{
     versionKey:false
