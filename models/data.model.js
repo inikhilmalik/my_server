@@ -14,6 +14,7 @@ const dataSchema = mongoose.Schema({
     vendor: String,
     type: String,
     actualDays:Number,
+    revisedDays:Number,
     zone:String,
     location:String,
     images: [{ pic: String, action: Boolean }],
