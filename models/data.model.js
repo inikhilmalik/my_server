@@ -18,6 +18,7 @@ const dataSchema = mongoose.Schema({
     zone:String,
     location:String,
     images: [{ pic: String, action: Boolean }],
+    notes:String,
     projectID:String
 }, {
     versionKey: false
