@@ -27,7 +27,7 @@ app.use("/project",projectRouter)
 
 app.use("/data",dataRouter);
 
-// app.use("/todo",todoRouter);
+app.use("/todo",todoRouter);
 
 app.use("/uploads",express.static("uploads"))
 
