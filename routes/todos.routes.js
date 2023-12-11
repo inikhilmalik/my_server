@@ -39,23 +39,23 @@ todoRouter.get("/:id",async(req,res)=>{
 //     }
 // })
 
-todoRouter.patch("/update/:id",async(req,res)=>{
+todoRouter.patch("/updateTodo/:id",async(req,res)=>{
     const {id}=req.params;
     // console.log(id)
     try{
         await TodoModel.findByIdAndUpdate({_id:id},req.body);
-        res.send("data is updated")
+        res.send("todo is updated")
     }catch(err){
         res.send({"err":err.message})
     }
 })
 
-todoRouter.delete("/deleteProject/:id",async(req,res)=>{
+todoRouter.delete("/deleteTodo/:id",async(req,res)=>{
     const {id}=req.params;
     // console.log(id)
     try{
         await TodoModel.findByIdAndDelete({_id:id});
-        res.send("project is deleted")
+        res.send("todo is deleted")
     }catch(err){
         res.send({"err":err.message})
     }
