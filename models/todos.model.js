@@ -5,6 +5,7 @@ const todoSchema = mongoose.Schema({
     status: String,
     projectId: String,
     taskDate: String,
+    focus:String
 }, {
     versionKey: false
 })
