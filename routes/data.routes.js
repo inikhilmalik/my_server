@@ -77,7 +77,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 
-dataRouter.post("/updateImages/:id",upload.array('image', 10),async(req,res)=>{
+dataRouter.patch("/updateImages/:id",upload.array('image', 10),async(req,res)=>{
     const {id}=req.params;
   
     const images = req.files.map((file) => ({
