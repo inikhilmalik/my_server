@@ -17,6 +17,18 @@ dataRouter.get("/:id",async(req,res)=>{
     }
 })
 
+dataRouter.get("singledata/:id",async(req,res)=>{
+    const {id}=req.params;
+    // console.log(id,"id")
+    try{
+        const data=await dataModal.find({_id:id});
+        // console.log(data,"data")
+        res.send(data)
+    }catch(err){
+        res.send({"err":err.message})
+    }
+})
+
 dataRouter.post("/create",async(req,res)=>{
     try{
         const data=new dataModal(req.body);
@@ -57,7 +69,7 @@ const storage = multer.diskStorage({
       cb(null, './uploads/');
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+"-"+file.originalname);
+        cb(null, (file.fieldname + '-' + Date.now()+"-"+Math.random()+file.originalname).split(" ").join(""));
     },
   });
   
@@ -68,7 +80,7 @@ dataRouter.patch("/updateImages/:id",upload.array('image', 10),async(req,res)=>{
     const {id}=req.params;
   
     const images = req.files.map((file) => ({
-        pic: file.path,
+        pic: file.filename,
         action:false,
       }));
     //   console.log(images)
