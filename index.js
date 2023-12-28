@@ -18,6 +18,22 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 
+app.options('/data/updateImages/:id', cors(corsOptions));
+
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,POST,PUT,PATCH,DELETE');
+    // Add other necessary headers
+  
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200); // Respond to preflight requests
+    }
+  
+    next();
+  });
+  
+
 app.use((req, res, next) => {
     res.setHeader('Permissions-Policy', 'unloading=()');
     next();
