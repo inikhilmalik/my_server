@@ -17,7 +17,7 @@ dataRouter.get("/:id",async(req,res)=>{
     }
 })
 
-dataRouter.get("singledata/:id",async(req,res)=>{
+dataRouter.get("/singledata/:id",async(req,res)=>{
     const {id}=req.params;
     // console.log(id,"id")
     try{
