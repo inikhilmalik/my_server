@@ -84,7 +84,8 @@ dataRouter.patch("/updateImages/:id",upload.array('image', 10),async(req,res)=>{
         pic: file.filename,
         action:false,
       }));
-    //   console.log(images)
+      console.log(id)
+      console.log(images)
     try{
         await dataModal.findByIdAndUpdate({_id:id},{images})
         res.send("image is added")
