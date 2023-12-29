@@ -30,8 +30,6 @@ app.use("/data",dataRouter);
 
 app.use("/todo",todoRouter);
 
-app.use("/pic",picRouter);
-
 app.use("/uploads",express.static("uploads"))
 
 
