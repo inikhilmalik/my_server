@@ -6,6 +6,7 @@ const cors=require("cors");
 const { userRouter } = require("./routes/user.routes");
 const { projectRouter } = require("./routes/project.routes");
 const { todoRouter } = require("./routes/todos.routes");
+const { picRouter } = require("./routes/pic.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -28,6 +29,8 @@ app.use("/project",projectRouter)
 app.use("/data",dataRouter);
 
 app.use("/todo",todoRouter);
+
+app.use("/pic",picRouter);
 
 app.use("/uploads",express.static("uploads"))
 
