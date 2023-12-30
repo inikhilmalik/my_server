@@ -51,9 +51,9 @@ projectRouter.patch("/update/:id",async(req,res)=>{
 
 projectRouter.delete("/deleteProject/:id",async(req,res)=>{
     const {id}=req.params;
-    // console.log(id)
+    console.log(id)
     try{
-        await ProjectModal.findByIdAndDelete({_id:id});
+        await ProjectModal.findByIdAndDelete({projectID:id});
         res.send("project is deleted")
     }catch(err){
         res.send({"err":err.message})
