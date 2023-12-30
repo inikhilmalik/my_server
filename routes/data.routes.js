@@ -111,13 +111,13 @@ dataRouter.patch("/deleteImages/:id",async(req,res)=>{
     }
 })
 
-dataRouter.delete("/deleteData/id",async(req,res)=>{
+dataRouter.delete("/deleteData/:id",async(req,res)=>{
     const {id}=req.params;
     console.log(id)
-    console.log(req.body,"body/....../")
+    // console.log(req.body,"body/....../")
     try{
         await dataModal.deleteMany({projectID:id})
-        res.send("delete")
+        res.send("data is delete")
     }catch(err){
         res.send({"err":err.message})
     }
