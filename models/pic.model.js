@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 
 const picSchema = mongoose.Schema({
-    images: [{ pic: String, action: Boolean }],
+    image: String,
+    fileName:String,
     projectTaskId:String,
+    postedDate:String,
+    approvedDate:String,
+    version:Number
 }, {
     versionKey: false
 })

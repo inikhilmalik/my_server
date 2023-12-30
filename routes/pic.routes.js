@@ -29,18 +29,13 @@ picRouter.get("/:id", async (req, res) => {
     }
 })
 
-
-
-picRouter.post("/create/:id", upload.array('image', 10), async (req, res) => {
-    const { id } = req.params;
-    const images = req.files.map((file) => ({
-        pic: file.filename,
-        action: false,
-    }));
-    console.log(id)
-    console.log(images)
+picRouter.post("/create", upload.single('image'), async (req, res) => {
+    // const { id } = req.params;
+    console.log("reeeq",req.body.id)
+    console.log("reeeq",req.body.date)
+    console.log("reee",req.file)
     try {
-        const data = new PicModal({images,projectTaskId:id});
+        const data = new PicModal({image:req.file.filename,fileName:req.file.originalname, projectTaskId:req.body.id, postedDate:req.body.date, approvedDate:"", version:0});
         await data.save();
         res.send("image is added")
     }
@@ -48,6 +43,24 @@ picRouter.post("/create/:id", upload.array('image', 10), async (req, res) => {
         res.send({ "err": err.message })
     }
 })
+
+// picRouter.post("/create/:id", upload.array('image', 10), async (req, res) => {
+//     const { id } = req.params;
+//     const images = req.files.map((file) => ({
+//         pic: file.filename,
+//         action: false,
+//     }));
+//     console.log(id)
+//     console.log(images)
+//     try {
+//         const data = new PicModal({images,projectTaskId:id});
+//         await data.save();
+//         res.send("image is added")
+//     }
+//     catch (err) {
+//         res.send({ "err": err.message })
+//     }
+// })
 
 // picRouter.post("/create",async(req,res)=>{
 //     try{
@@ -59,37 +72,43 @@ picRouter.post("/create/:id", upload.array('image', 10), async (req, res) => {
 //     }
 // })
 
-
-picRouter.patch("/update/:id", async (req, res) => {
+picRouter.delete("/deleteImages/:id", async (req, res) => {
     const { id } = req.params;
     // console.log(id)
     try {
-        await PicModal.findByIdAndUpdate({ _id: id }, req.body);
-        res.send("data is updated")
+        await PicModal.findByIdAndDelete({ _id: id });
+        res.send("data is deleted")
     } catch (err) {
         res.send({ "err": err.message })
     }
 })
 
-
-
-
-
-picRouter.patch("/updateImages/:id", upload.array('image', 10), async (req, res) => {
+picRouter.patch("/updateImage/:id", async (req, res) => {
     const { id } = req.params;
-    const images = req.files.map((file) => ({
-        pic: file.filename,
-        action: false,
-    }));
-    console.log(id)
-    console.log(images)
+    // console.log(id)
     try {
-        await PicModal.findByIdAndUpdate({ _id: id }, { images })
-        res.send("image is added")
-    }
-    catch (err) {
+        await PicModal.findByIdAndUpdate({ _id: id }, req.body);
+        res.send("image data is updated")
+    } catch (err) {
         res.send({ "err": err.message })
     }
 })
+
+// picRouter.patch("/updateImages/:id", upload.array('image', 10), async (req, res) => {
+//     const { id } = req.params;
+//     const images = req.files.map((file) => ({
+//         pic: file.filename,
+//         action: false,
+//     }));
+//     console.log(id)
+//     console.log(images)
+//     try {
+//         await PicModal.findByIdAndUpdate({ _id: id }, { images })
+//         res.send("image is added")
+//     }
+//     catch (err) {
+//         res.send({ "err": err.message })
+//     }
+// })
 
 module.exports = { picRouter }

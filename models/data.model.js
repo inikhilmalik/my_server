@@ -17,10 +17,13 @@ const dataSchema = mongoose.Schema({
     revisedDays:Number,
     zone:String,
     location:String,
-    images: [{ pic: String, action: Boolean }],
+    approvalStatus:String,
     notes:String,
     projectID:String,
-    priorityOnDone:String
+    priorityOnDone:String,
+    subType:String,
+    daysTakenToApproved:Number,
+    clientName:String,
 }, {
     versionKey: false
 })
