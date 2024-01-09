@@ -24,6 +24,8 @@ const dataSchema = mongoose.Schema({
     subType:String,
     daysTakenToApproved:Number,
     clientName:String,
+    prevAddress:String,
+    isApproval:Boolean
 }, {
     versionKey: false
 })
