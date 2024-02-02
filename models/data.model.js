@@ -1,21 +1,31 @@
 const mongoose = require("mongoose");
 
 const dataSchema = mongoose.Schema({
-    row: Number,
+    row: String,
     category: String,
     priority: String,
     activity: String,
     planned: Number,
     startDate: String,
     endDate: String,
-    dependOn: Number,
-    precurserTask: String,
+    dependOn: String,
     status: String,
     taskOwner: String,
     vendor: String,
     type: String,
     actualDays:Number,
-    images: [{ pic: String, action: Boolean }]
+    revisedDays:Number,
+    zone:String,
+    location:String,
+    approvalStatus:String,
+    notes:String,
+    projectID:String,
+    priorityOnDone:String,
+    subType:String,
+    daysTakenToApproved:Number,
+    clientName:String,
+    prevAddress:String,
+    isApproval:Boolean
 }, {
     versionKey: false
 })

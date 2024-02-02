@@ -5,9 +5,24 @@ const { dataModal } = require("../models/data.model");
 
 const dataRouter=express.Router();
 
-dataRouter.get("/",async(req,res)=>{
+dataRouter.get("/:id",async(req,res)=>{
+    const {id}=req.params;
+    // console.log(id,"id")
     try{
-        const data=await dataModal.find();
+        const data=await dataModal.find({projectID:id});
+        // console.log(data,"data")
+        res.send(data)
+    }catch(err){
+        res.send({"err":err.message})
+    }
+})
+
+dataRouter.get("/singledata/:id",async(req,res)=>{
+    const {id}=req.params;
+    // console.log(id,"id")
+    try{
+        const data=await dataModal.find({_id:id});
+        // console.log(data,"data")
         res.send(data)
     }catch(err){
         res.send({"err":err.message})
@@ -36,10 +51,12 @@ dataRouter.patch("/update/:id",async(req,res)=>{
     }
 })
 
-dataRouter.post("/updateData",async(req,res)=>{
-    // console.log(req.body)
+dataRouter.post("/updateData/:id",async(req,res)=>{
+    const {id}=req.params;
+    console.log(id)
+    console.log(req.body,"body/....../")
     try{
-        await dataModal.deleteMany({})
+        await dataModal.deleteMany({projectID:id})
         await dataModal.insertMany(req.body);
         res.send("updation")
     }catch(err){
@@ -47,12 +64,13 @@ dataRouter.post("/updateData",async(req,res)=>{
     }
 })
 
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './uploads/');
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+"-"+file.originalname);
+        cb(null, (file.fieldname + '-' + Date.now()+"-"+Math.random()+file.originalname).split(" ").join(""));
     },
   });
   
@@ -61,17 +79,46 @@ const storage = multer.diskStorage({
 
 dataRouter.patch("/updateImages/:id",upload.array('image', 10),async(req,res)=>{
     const {id}=req.params;
-  
     const images = req.files.map((file) => ({
-        pic: file.path,
+        pic: file.filename,
         action:false,
       }));
-    //   console.log(images)
+      console.log(id)
+      console.log(images)
     try{
         await dataModal.findByIdAndUpdate({_id:id},{images})
         res.send("image is added")
     }
     catch(err){
+        res.send({"err":err.message})
+    }
+})
+
+dataRouter.patch("/deleteImages/:id",async(req,res)=>{
+    const {id}=req.params;
+    // const images = req.files.map((file) => ({
+    //     pic: file.filename,
+    //     action:false,
+    //   }));
+      console.log(id)
+      console.log(req.body)
+    try{
+        await dataModal.findByIdAndUpdate({_id:id},req.body)
+        res.send("image is added")
+    }
+    catch(err){
+        res.send({"err":err.message})
+    }
+})
+
+dataRouter.delete("/deleteData/:id",async(req,res)=>{
+    const {id}=req.params;
+    console.log(id)
+    // console.log(req.body,"body/....../")
+    try{
+        await dataModal.deleteMany({projectID:id})
+        res.send("data is delete")
+    }catch(err){
         res.send({"err":err.message})
     }
 })
