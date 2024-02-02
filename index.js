@@ -5,6 +5,7 @@ const app=express();
 const cors=require("cors");
 const { userRouter } = require("./routes/user.routes");
 const { projectRouter } = require("./routes/project.routes");
+const { rateListRouter } = require("./routes/ratelist.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -25,6 +26,8 @@ app.use("/user",userRouter)
 app.use("/project",projectRouter)
 
 app.use("/data",dataRouter);
+
+app.use("/rateList",rateListRouter);
 
 app.use("/uploads",express.static("uploads"))
 
