@@ -17,7 +17,6 @@ rateListRouter.get("/:id", async (req, res) => {
     }
 })
 
-
 rateListRouter.post("/create",async(req,res)=>{
     console.log(req.body)
     try{
@@ -28,6 +27,7 @@ rateListRouter.post("/create",async(req,res)=>{
         res.send({"err":err.message})
     }
 })
+
 
 rateListRouter.patch("/updateRateList/:id", async (req, res) => {
     const { id } = req.params;
