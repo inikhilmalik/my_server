@@ -6,6 +6,7 @@ const cors=require("cors");
 const { userRouter } = require("./routes/user.routes");
 const { projectRouter } = require("./routes/project.routes");
 const { rateListRouter } = require("./routes/ratelist.routes");
+const { teamMemberRouter } = require("./routes/teamMember.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -22,6 +23,8 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/user",userRouter)
+
+app.use("/team",teamMemberRouter)
 
 app.use("/project",projectRouter)
 

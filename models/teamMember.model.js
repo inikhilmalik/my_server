@@ -1,17 +1,19 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema(
+const teamMemberSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     number:{type:Number},
     role:{type:String},
+    ownerId:{type:String},
+    permissions:[]
   },{
     versionKey:false
 }
 );
 
-const UserModel = mongoose.model("User", userSchema);
+const TeamMemberModel = mongoose.model("team", teamMemberSchema);
 
-module.exports = {UserModel};
+module.exports = {TeamMemberModel};
