@@ -7,6 +7,7 @@ const { userRouter } = require("./routes/user.routes");
 const { projectRouter } = require("./routes/project.routes");
 const { rateListRouter } = require("./routes/ratelist.routes");
 const { teamMemberRouter } = require("./routes/teamMember.routes");
+const { rolesRouter } = require("./routes/roles.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -31,6 +32,8 @@ app.use("/project",projectRouter)
 app.use("/data",dataRouter);
 
 app.use("/rateList",rateListRouter);
+
+app.use("/roles",rolesRouter);
 
 app.use("/uploads",express.static("uploads"))
 

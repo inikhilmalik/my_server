@@ -1,32 +1,32 @@
 const express=require("express");
-const { TodoModel } = require("../models/todos.model");
+const { RolesModel } = require("../models/roles.model");
 
 
-const todoRouter=express.Router();
+const rolesRouter=express.Router();
 
-todoRouter.post("/create",async(req,res)=>{
+rolesRouter.post("/create",async(req,res)=>{
     try{
-        const data=new TodoModel(req.body);
+        const data=new RolesModel(req.body);
         await data.save();
-        res.send("Todo is created")
+        res.send("Roles is created")
     }catch(err){
         res.send({"err":err.message})
     }
 })
 
-todoRouter.get("/:id",async(req,res)=>{
+rolesRouter.get("/:id",async(req,res)=>{
     const {id}=req.params
     console.log(id)
     try{
-        const data=await TodoModel.find({projectId:id});
-        // console.log(data)
+        const data=await RolesModel.find({projectId:id});
+        // console.log(data)s
         res.send(data)
     }catch(err){
         res.send({"err":err.message})
     }
 })
 
-// todoRouter.get("/single/:id",async(req,res)=>{
+// rolesRouter.get("/single/:id",async(req,res)=>{
 //     const {id}=req.params
 //     console.log(id)
 //     try{
@@ -38,26 +38,26 @@ todoRouter.get("/:id",async(req,res)=>{
 //     }
 // })
 
-todoRouter.patch("/updateTodo/:id",async(req,res)=>{
+rolesRouter.patch("/update/:id",async(req,res)=>{
     const {id}=req.params;
     // console.log(id)
     try{
-        await TodoModel.findByIdAndUpdate({_id:id},req.body);
+        await RolesModel.findByIdAndUpdate({_id:id},req.body);
         res.send("todo is updated")
     }catch(err){
         res.send({"err":err.message})
     }
 })
 
-todoRouter.delete("/deleteTodo/:id",async(req,res)=>{
+rolesRouter.delete("/delete/:id",async(req,res)=>{
     const {id}=req.params;
     // console.log(id)
     try{
-        await TodoModel.findByIdAndDelete({_id:id});
+        await RolesModel.findByIdAndDelete({_id:id});
         res.send("todo is deleted")
     }catch(err){
         res.send({"err":err.message})
     }
   })
 
-module.exports={todoRouter}
+module.exports={rolesRouter}
