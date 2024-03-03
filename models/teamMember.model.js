@@ -8,7 +8,6 @@ const teamMemberSchema = mongoose.Schema(
     number:{type:Number},
     role:{type:String},
     ownerId:{type:String},
-    permissions:[]
   },{
     versionKey:false
 }

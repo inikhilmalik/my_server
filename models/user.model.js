@@ -8,7 +8,6 @@ const userSchema = mongoose.Schema(
     number:{type:Number},
     role:{type:String},
     permissions:{}
-
   },{
     versionKey:false
 }
