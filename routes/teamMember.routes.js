@@ -60,9 +60,12 @@ teamMemberRouter.post("/login", async (req, res) => {
   }
 });
 
-teamMemberRouter.get("/getUsers", async (req, res) => {
+teamMemberRouter.get("/getteam/:id", async (req, res) => {
+  const {id}=req.params
   try {
-    const users = await TeamMemberModel.find();
+    const users = await TeamMemberModel.find({ownerId:id});
+    console.log(users)
+    console.log(id)
     if (!users) {
       return res.status(200).send({ message: "no users" });
     }

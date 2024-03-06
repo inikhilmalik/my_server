@@ -7,7 +7,8 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: true },
     number:{type:Number},
     role:{type:String},
-    permissions:{}
+    ownerId: {type:String},
+    type:{type:String},
   },{
     versionKey:false
 }

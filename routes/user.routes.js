@@ -60,13 +60,15 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
-userRouter.get("/getUsers", async (req, res) => {
+userRouter.get("/getUsers/:id", async (req, res) => {
+  const {id}=req.params
   try {
-    const users = await UserModel.find();
+    const users = await UserModel.find({ownerId:id});
     if (!users) {
       return res.status(200).send({ message: "no users" });
     }
-
+    console.log(id)
+    console.log(users)
     res.status(200).send(users);
 
   } catch (error) {

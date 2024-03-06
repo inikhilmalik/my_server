@@ -14,11 +14,27 @@ projectRouter.post("/create",async(req,res)=>{
     }
 })
 
+projectRouter.get("/owner/:id",async(req,res)=>{
+    const {id}=req.params
+    // console.log(id)
+    const query = {};
+    try{
+        const data=await ProjectModal.find({ownerId:id});
+        // console.log(data)
+        res.send(data)
+    }catch(err){
+        res.send({"err":err.message})
+    }
+})
+
 projectRouter.get("/:id",async(req,res)=>{
     const {id}=req.params
-    console.log(id)
+    // console.log(id)
+    const query = {};
+    query[`added.${id}`] = { $exists: true };
+    // console.log(query)
     try{
-        const data=await ProjectModal.find({adminID:id});
+        const data=await ProjectModal.find(query);
         // console.log(data)
         res.send(data)
     }catch(err){
@@ -31,7 +47,7 @@ projectRouter.get("/single/:id",async(req,res)=>{
     console.log(id)
     try{
         const data=await ProjectModal.find({_id:id});
-        console.log(data,"dddd")
+        // console.log(data,"dddd")
         res.send(data)
     }catch(err){
         res.send({"err":err.message})

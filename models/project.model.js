@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 
 const projectSchema = mongoose.Schema({
     projectName: String,
-     vendorName: [],
-    adminID:String
+    createdId: String,
+    ownerId: String,
+    added:{}
 }, {
     versionKey: false
 })

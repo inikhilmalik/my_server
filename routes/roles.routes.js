@@ -18,8 +18,7 @@ rolesRouter.get("/:id",async(req,res)=>{
     const {id}=req.params
     console.log(id)
     try{
-        const data=await RolesModel.find({projectId:id});
-        // console.log(data)s
+        const data=await RolesModel.find({ownerId:id});
         res.send(data)
     }catch(err){
         res.send({"err":err.message})
@@ -40,24 +39,25 @@ rolesRouter.get("/:id",async(req,res)=>{
 
 rolesRouter.patch("/update/:id",async(req,res)=>{
     const {id}=req.params;
-    // console.log(id)
+    console.log(id)
+    console.log(req.body)
     try{
-        await RolesModel.findByIdAndUpdate({_id:id},req.body);
-        res.send("todo is updated")
+        await RolesModel.findOneAndUpdate({ownerId:id},req.body);
+        res.send("roles is updated")
     }catch(err){
         res.send({"err":err.message})
     }
 })
 
-rolesRouter.delete("/delete/:id",async(req,res)=>{
-    const {id}=req.params;
-    // console.log(id)
-    try{
-        await RolesModel.findByIdAndDelete({_id:id});
-        res.send("todo is deleted")
-    }catch(err){
-        res.send({"err":err.message})
-    }
-  })
+// rolesRouter.delete("/delete/:id",async(req,res)=>{
+//     const {id}=req.params;
+//     // console.log(id)
+//     try{
+//         await RolesModel.findByIdAndDelete({_id:id});
+//         res.send("todo is deleted")
+//     }catch(err){
+//         res.send({"err":err.message})
+//     }
+//   })
 
 module.exports={rolesRouter}
