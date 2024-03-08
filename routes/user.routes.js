@@ -63,7 +63,14 @@ userRouter.post("/login", async (req, res) => {
 userRouter.get("/getUsers/:id", async (req, res) => {
   const {id}=req.params
   try {
-    const users = await UserModel.find({ownerId:id});
+    const query = {
+      $or: [
+        { _id: id, ownerId: id }, // Documents with both id and ownerId
+        { _id: id }, // Documents with matching id only
+        { ownerId: id } // Documents with matching ownerId only
+      ]
+    };
+    const users = await UserModel.find(query);
     if (!users) {
       return res.status(200).send({ message: "no users" });
     }
