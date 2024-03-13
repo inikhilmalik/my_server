@@ -74,8 +74,8 @@ userRouter.get("/getUsers/:id", async (req, res) => {
     if (!users) {
       return res.status(200).send({ message: "no users" });
     }
-    console.log(id)
-    console.log(users)
+    // console.log(id)
+    // console.log(users)
     res.status(200).send(users);
 
   } catch (error) {

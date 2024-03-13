@@ -4,7 +4,9 @@ const projectSchema = mongoose.Schema({
     projectName: String,
     createdId: String,
     ownerId: String,
-    added:{}
+    added: {},
+    isTemplate: Boolean,
+    isArchive: Boolean,
 }, {
     versionKey: false
 })
