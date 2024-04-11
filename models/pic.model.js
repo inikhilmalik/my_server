@@ -6,6 +6,7 @@ const picSchema = mongoose.Schema({
     projectTaskId:String,
     postedDate:String,
     approvedDate:String,
+    picApprovalStatus:String,
     version:Number
 }, {
     versionKey: false

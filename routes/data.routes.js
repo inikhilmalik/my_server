@@ -55,10 +55,15 @@ dataRouter.post("/updateData/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id)
     console.log(req.body, "body/....../")
-    try {
-        await dataModal.deleteMany({ projectID: id })
-        await dataModal.insertMany(req.body);
-        res.send("updation")
+    try{
+        if(id){
+            await dataModal.deleteMany({projectID:id})
+            await dataModal.insertMany(req.body);
+            res.send("updation")
+        }
+        else{
+            res.send("Something went wrong try again later")
+        }
     } catch (err) {
         res.send({ "err": err.message })
     }

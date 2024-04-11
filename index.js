@@ -10,6 +10,7 @@ const { teamMemberRouter } = require("./routes/teamMember.routes");
 const { rolesRouter } = require("./routes/roles.routes");
 const { noteRouter } = require("./routes/notes.routes");
 const { picRouter } = require("./routes/pic.routes");
+const { masterCategoryRouter } = require("./routes/masterCategory.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -40,6 +41,8 @@ app.use("/roles",rolesRouter);
 app.use("/pic",picRouter);
 
 app.use("/note",noteRouter);
+
+app.use("/masterCategory",masterCategoryRouter);
 
 app.use("/uploads",express.static("uploads"))
 
