@@ -72,7 +72,7 @@ dataRouter.post("/updateData/:id", async (req, res) => {
 dataRouter.post("/importData", async (req, res) => {
     try {
         await dataModal.insertMany(req.body);
-        res.send("imported")
+        res.send("Data Inserted")
     } catch (err) {
         res.send({ "err": err.message })
     }
