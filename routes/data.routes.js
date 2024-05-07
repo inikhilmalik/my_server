@@ -55,13 +55,13 @@ dataRouter.post("/updateData/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id)
     console.log(req.body, "body/....../")
-    try{
-        if(id){
-            await dataModal.deleteMany({projectID:id})
+    try {
+        if (id) {
+            await dataModal.deleteMany({ projectID: id })
             await dataModal.insertMany(req.body);
             res.send("updation")
         }
-        else{
+        else {
             res.send("Something went wrong try again later")
         }
     } catch (err) {
@@ -70,13 +70,34 @@ dataRouter.post("/updateData/:id", async (req, res) => {
 })
 
 dataRouter.post("/importData", async (req, res) => {
+    const { projectTemplateId, projectId } = req.body
+    // console.log(req.body)
     try {
-        await dataModal.insertMany(req.body);
+        const templateData = await dataModal.find({ projectID: projectTemplateId },{_id: 0});
+        let newData = []
+        if (templateData.length > 0) {
+            for (let i = 0; i < templateData.length; i++) {
+                templateData[i]["projectID"]= projectId;
+                // delete templateData[i]["_id"]
+                // newData.push({ ...templateData[i], projectID: projectId })
+            }
+            await dataModal.insertMany(templateData);
+        }
+        // console.log("=1=1=1=1=1=1=",templateData)
         res.send("Data Inserted")
     } catch (err) {
         res.send({ "err": err.message })
     }
 })
+
+// dataRouter.post("/importData", async (req, res) => {
+//     try {
+//         await dataModal.insertMany(req.body);
+//         res.send("Data Inserted")
+//     } catch (err) {
+//         res.send({ "err": err.message })
+//     }
+// })
 
 
 const storage = multer.diskStorage({

@@ -7,6 +7,9 @@ const projectSchema = mongoose.Schema({
     added: {},
     isTemplate: Boolean,
     isArchive: Boolean,
+    projectType:String,
+    floors:Number,
+    shellType:String
 }, {
     versionKey: false
 })
