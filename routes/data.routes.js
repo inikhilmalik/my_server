@@ -69,15 +69,25 @@ dataRouter.post("/updateData/:id", async (req, res) => {
     }
 })
 
+dataRouter.post("/insertData", async (req, res) => {
+    // console.log(req)
+    try {
+        await dataModal.insertMany(req.body);
+        // console.log("=1=1=1=1=1=1=",templateData)
+        res.send("data created")
+    } catch (err) {
+        res.send({ "err": err.message })
+    }
+})
 dataRouter.post("/importData", async (req, res) => {
     const { projectTemplateId, projectId } = req.body
     // console.log(req.body)
     try {
-        const templateData = await dataModal.find({ projectID: projectTemplateId },{_id: 0});
-        let newData = []
+        const templateData = await dataModal.find({ projectID: projectTemplateId }, { _id: 0 });
+        // let newData = []
         if (templateData.length > 0) {
             for (let i = 0; i < templateData.length; i++) {
-                templateData[i]["projectID"]= projectId;
+                templateData[i]["projectID"] = projectId;
                 // delete templateData[i]["_id"]
                 // newData.push({ ...templateData[i], projectID: projectId })
             }
