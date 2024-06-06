@@ -54,11 +54,15 @@ dataRouter.patch("/update/:id", async (req, res) => {
 dataRouter.post("/updateData/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id)
-    console.log(req.body, "body/....../")
+    // console.log(req.body, "body/....../")
     try {
         if (id) {
             await dataModal.deleteMany({ projectID: id })
-            await dataModal.insertMany(req.body);
+            const checkData = await dataModal.find({ projectID: id });
+            console.log(checkData, "checkDataaaaa")
+            if(checkData.length==0){
+                await dataModal.insertMany(req.body);
+            }
             res.send("updation")
         }
         else {

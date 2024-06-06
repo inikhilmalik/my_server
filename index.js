@@ -3,6 +3,7 @@ const { connection } = require("./db");
 const { dataRouter } = require("./routes/data.routes");
 const app=express();
 const cors=require("cors");
+const bodyParser=require("body-parser");
 const { userRouter } = require("./routes/user.routes");
 const { projectRouter } = require("./routes/project.routes");
 const { rateListRouter } = require("./routes/ratelist.routes");
@@ -14,6 +15,8 @@ const { masterCategoryRouter } = require("./routes/masterCategory.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
+app.use(bodyParser.json({ limit: '900mb' }));
+app.use(bodyParser.urlencoded({ extended: true,parameterLimit: 1000000000,limit: '900mb'}));
 app.use(cors())
 app.use(express.json())
 
