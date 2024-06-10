@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const dotenv = require('dotenv').config();
 
 // Internal Dependencies
-const { connection } = require("./db");
+const { connection } = require("./initDB");
 const { dataRouter } = require("./routes/data.routes");
 const { userRouter } = require("./routes/user.routes");
 const { projectRouter } = require("./routes/project.routes");
