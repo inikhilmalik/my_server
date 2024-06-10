@@ -34,10 +34,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/", (req, res) => {
-    res.send("Homepage");
-})
-
 // Routes
 app.use("/user", userRouter);
 app.use("/team", teamMemberRouter);
