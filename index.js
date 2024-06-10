@@ -10,15 +10,15 @@ const dotenv = require('dotenv').config();
 require('./initDB')();
 
 // Internal Dependencies
-const { dataRouter } = require("./routes/data.routes");
-const { userRouter } = require("./routes/user.routes");
-const { projectRouter } = require("./routes/project.routes");
-const { rateListRouter } = require("./routes/ratelist.routes");
-const { teamMemberRouter } = require("./routes/teamMember.routes");
-const { rolesRouter } = require("./routes/roles.routes");
-const { noteRouter } = require("./routes/notes.routes");
-const { picRouter } = require("./routes/pic.routes");
-const { masterCategoryRouter } = require("./routes/masterCategory.routes");
+const { dataRouter } = require("./Routes/data.routes");
+const { userRouter } = require("./Routes/user.routes");
+const { projectRouter } = require("./Routes/project.routes");
+const { rateListRouter } = require("./Routes/ratelist.routes");
+const { teamMemberRouter } = require("./Routes/teamMember.routes");
+const { rolesRouter } = require("./Routes/roles.routes");
+const { noteRouter } = require("./Routes/notes.routes");
+const { picRouter } = require("./Routes/pic.routes");
+const { masterCategoryRouter } = require("./Routes/masterCategory.routes");
 
 const app = express();
 
@@ -49,6 +49,10 @@ app.use("/pic", picRouter);
 app.use("/note", noteRouter);
 app.use("/masterCategory", masterCategoryRouter);
 app.use("/uploads", express.static("uploads"))
+
+// Routes (Restructured)
+const VERSION = process.env.VERSION || "v1";
+const baseURI = `/api/${VERSION}`;
 
 // 404 handler and pass to error handler
 app.use((req, res, next) => {

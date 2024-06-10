@@ -1,5 +1,5 @@
 const express = require("express");
-const { RatelistModal } = require("../models/ratelist.model");
+const { RatelistModal } = require("../Models/ratelist.model");
 
 
 const rateListRouter = express.Router();

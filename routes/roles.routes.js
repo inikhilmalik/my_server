@@ -1,5 +1,5 @@
 const express=require("express");
-const { RolesModel } = require("../models/roles.model");
+const { RolesModel } = require("../Models/roles.model");
 
 
 const rolesRouter=express.Router();
