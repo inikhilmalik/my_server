@@ -6,8 +6,10 @@ const bodyParser = require("body-parser");
 
 const dotenv = require('dotenv').config();
 
+// Initialize DB
+require('./initDB')();
+
 // Internal Dependencies
-const { connection } = require("./initDB");
 const { dataRouter } = require("./routes/data.routes");
 const { userRouter } = require("./routes/user.routes");
 const { projectRouter } = require("./routes/project.routes");
@@ -69,12 +71,5 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, async () => {
-    try {
-        await connection;
-        console.log("Connected to DB")
-    } catch (err) {
-        console.log("Cannot connect to DB")
-        console.log(err);
-    }
     console.log(`Server started on port ${PORT}...`)
 })

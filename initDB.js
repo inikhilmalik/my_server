@@ -1,6 +1,33 @@
-const mongoose=require("mongoose");
-require("dotenv").config()
+const mongoose = require('mongoose');
 
-const connection=mongoose.connect(process.env.mongoURL)
+module.exports = () => {
+  mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => {
+      console.log('Mongodb connected....');
+    })
+    .catch(err => console.log(err.message));
 
-module.exports={connection};
+  mongoose.connection.on('connected', () => {
+    console.log('Mongoose connected to db...');
+  });
+
+  mongoose.connection.on('error', err => {
+    console.log(err.message);
+    process.exit(0);
+  });
+
+  mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose connection is disconnected...');
+    process.exit(0);
+  });
+
+  process.on('SIGINT', () => {
+    mongoose.connection.close(() => {
+      console.log(
+        'Mongoose connection is disconnected due to app termination...'
+      );
+      process.exit(0);
+    });
+  });
+};
