@@ -50,6 +50,9 @@ app.use("/uploads", express.static("uploads"));
 const VERSION = process.env.VERSION || "v1";
 const baseURI = `/api/${VERSION}`;
 
+const projectRouterNew = require("./Routes/Restructured/Project.routes");
+app.use(`${baseURI}/projects`, userRouter);
+
 // 404 handler and pass to error handler
 app.use((req, res, next) => {
     next(createError(404, 'Not found'));
