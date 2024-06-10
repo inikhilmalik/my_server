@@ -25,8 +25,8 @@ const app = express();
 // Settings
 app.use(bodyParser.json({ limit: '900mb' }));
 app.use(bodyParser.urlencoded({ extended: true, parameterLimit: 1000000000, limit: '900mb'}));
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 // Setting headers
 app.use((req, res, next) => {
@@ -35,20 +35,20 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-    res.send("Homepage")
+    res.send("Homepage");
 })
 
 // Routes
-app.use("/user", userRouter)
-app.use("/team", teamMemberRouter)
-app.use("/project", projectRouter)
+app.use("/user", userRouter);
+app.use("/team", teamMemberRouter);
+app.use("/project", projectRouter);
 app.use("/data", dataRouter);
 app.use("/rateList", rateListRouter);
 app.use("/roles", rolesRouter);
 app.use("/pic", picRouter);
 app.use("/note", noteRouter);
 app.use("/masterCategory", masterCategoryRouter);
-app.use("/uploads", express.static("uploads"))
+app.use("/uploads", express.static("uploads"));
 
 // Routes (Restructured)
 const VERSION = process.env.VERSION || "v1";
@@ -76,4 +76,4 @@ const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, async () => {
     console.log(`Server started on port ${PORT}...`)
-})
+});
