@@ -1,5 +1,5 @@
 const express=require("express");
-const { ProjectModal } = require("../models/project.model");
+const { ProjectModal } = require("../Models/project.model");
 
 
 const projectRouter=express.Router();

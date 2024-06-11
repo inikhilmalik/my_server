@@ -1,5 +1,5 @@
 const express=require("express");
-const { NoteModal } = require("../models/notes.model");
+const { NoteModal } = require("../Models/notes.model");
 
 const noteRouter=express.Router();
 

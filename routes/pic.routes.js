@@ -2,8 +2,8 @@ const express = require("express");
 const multer = require('multer');
 const fs = require('fs');
 
-const { dataModal } = require("../models/data.model");
-const { PicModal } = require("../models/pic.model");
+const { dataModal } = require("../Models/data.model");
+const { PicModal } = require("../Models/pic.model");
 
 const picRouter = express.Router();
 

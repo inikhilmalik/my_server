@@ -1,5 +1,5 @@
 const express=require("express");
-const { MasterCategorySchemaModel } = require("../models/masterCategory.model");
+const { MasterCategorySchemaModel } = require("../Models/masterCategory.model");
 
 const masterCategoryRouter=express.Router();
 

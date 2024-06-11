@@ -1,63 +1,78 @@
-const express=require("express");
-const { connection } = require("./db");
-const { dataRouter } = require("./routes/data.routes");
-const app=express();
-const cors=require("cors");
-const bodyParser=require("body-parser");
-const { userRouter } = require("./routes/user.routes");
-const { projectRouter } = require("./routes/project.routes");
-const { rateListRouter } = require("./routes/ratelist.routes");
-const { teamMemberRouter } = require("./routes/teamMember.routes");
-const { rolesRouter } = require("./routes/roles.routes");
-const { noteRouter } = require("./routes/notes.routes");
-const { picRouter } = require("./routes/pic.routes");
-const { masterCategoryRouter } = require("./routes/masterCategory.routes");
-require("dotenv").config()
+// External Dependencies
+const express = require('express');
+const createError = require('http-errors');
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
-const port=process.env.PORT||8080;
+const dotenv = require('dotenv').config();
+
+// Initialize DB
+require('./initDB')();
+
+// Internal Dependencies
+const { dataRouter } = require("./Routes/data.routes");
+const { userRouter } = require("./Routes/user.routes");
+const { projectRouter } = require("./Routes/project.routes");
+const { rateListRouter } = require("./Routes/ratelist.routes");
+const { teamMemberRouter } = require("./Routes/teamMember.routes");
+const { rolesRouter } = require("./Routes/roles.routes");
+const { noteRouter } = require("./Routes/notes.routes");
+const { picRouter } = require("./Routes/pic.routes");
+const { masterCategoryRouter } = require("./Routes/masterCategory.routes");
+
+const app = express();
+
+// Settings
 app.use(bodyParser.json({ limit: '900mb' }));
-app.use(bodyParser.urlencoded({ extended: true,parameterLimit: 1000000000,limit: '900mb'}));
-app.use(cors())
-app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true, parameterLimit: 1000000000, limit: '900mb'}));
+app.use(cors());
+app.use(express.json());
 
+// Setting headers
 app.use((req, res, next) => {
     res.setHeader('Permissions-Policy', 'unloading=()');
     next();
-  });
+});
 
-app.get("/",(req,res)=>{
-    res.send("Homepage")
-})
+// Routes
+app.use("/user", userRouter);
+app.use("/team", teamMemberRouter);
+app.use("/project", projectRouter);
+app.use("/data", dataRouter);
+app.use("/rateList", rateListRouter);
+app.use("/roles", rolesRouter);
+app.use("/pic", picRouter);
+app.use("/note", noteRouter);
+app.use("/masterCategory", masterCategoryRouter);
+app.use("/uploads", express.static("uploads"));
 
-app.use("/user",userRouter)
+// Routes (Restructured)
+const VERSION = process.env.VERSION || "v1";
+const baseURI = `/api/${VERSION}`;
 
-app.use("/team",teamMemberRouter)
+const projectRouterNew = require("./Routes/Restructured/Project.routes");
+app.use(`${baseURI}/projects`, userRouter);
 
-app.use("/project",projectRouter)
+// 404 handler and pass to error handler
+app.use((req, res, next) => {
+    next(createError(404, 'Not found'));
+});
 
-app.use("/data",dataRouter);
-
-app.use("/rateList",rateListRouter);
-
-app.use("/roles",rolesRouter);
-
-app.use("/pic",picRouter);
-
-app.use("/note",noteRouter);
-
-app.use("/masterCategory",masterCategoryRouter);
-
-app.use("/uploads",express.static("uploads"))
+// Error handler
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.send({
+        error: {
+            status: err.status || 500,
+            message: err.message || "Internal Server Error"
+        }
+    });
+});
 
 
-app.listen(port,async()=>{
-    try{
-        await connection;
-        console.log("connected to DB")
-    }catch(err){
-        console.log("Cannot connected to DB")
-        console.log(err);
-    }
+// Start WS
+const PORT = process.env.PORT || 8080;
 
-    console.log(`server is running at port ${port}`)
-})
+app.listen(PORT, async () => {
+    console.log(`Server started on port ${PORT}...`)
+});

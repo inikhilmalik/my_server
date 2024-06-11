@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require('multer');
 
-const { dataModal } = require("../models/data.model");
+const { dataModal } = require("../Models/data.model");
 
 const dataRouter = express.Router();
 
