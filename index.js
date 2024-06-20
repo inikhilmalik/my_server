@@ -12,6 +12,7 @@ const { rolesRouter } = require("./routes/roles.routes");
 const { noteRouter } = require("./routes/notes.routes");
 const { picRouter } = require("./routes/pic.routes");
 const { masterCategoryRouter } = require("./routes/masterCategory.routes");
+const { todoRouter } = require("./routes/todos.routes");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -44,6 +45,8 @@ app.use("/roles",rolesRouter);
 app.use("/pic",picRouter);
 
 app.use("/note",noteRouter);
+
+app.use("/todo",todoRouter);
 
 app.use("/masterCategory",masterCategoryRouter);
 

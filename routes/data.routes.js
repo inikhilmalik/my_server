@@ -9,7 +9,7 @@ dataRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
     // console.log(id,"id")
     try {
-        const data = await dataModal.find({ projectID: id });
+        const data = await dataModal.find({ projectID: id }).sort({ order: 1 });
         // console.log(data,"data")
         res.send(data)
     } catch (err) {
