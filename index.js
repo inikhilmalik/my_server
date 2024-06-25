@@ -13,6 +13,8 @@ const { noteRouter } = require("./routes/notes.routes");
 const { picRouter } = require("./routes/pic.routes");
 const { masterCategoryRouter } = require("./routes/masterCategory.routes");
 const { todoRouter } = require("./routes/todos.routes");
+const { noteNotificationRouter } = require("./routes/noteNotification");
+const { approvalRouter } = require("./routes/approval.route");
 require("dotenv").config()
 
 const port=process.env.PORT||8080;
@@ -49,6 +51,10 @@ app.use("/note",noteRouter);
 app.use("/todo",todoRouter);
 
 app.use("/masterCategory",masterCategoryRouter);
+
+app.use("/noteNotification",noteNotificationRouter);
+ 
+app.use("/approvalRequired",approvalRouter);
 
 app.use("/uploads",express.static("uploads"))
 
