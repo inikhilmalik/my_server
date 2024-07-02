@@ -5,7 +5,8 @@ const noteSchema = mongoose.Schema({
     date: String,
     itemId:String,
     projectId:String,
-    note:String
+    note:String,
+    createdBy:String,
 }, {
     versionKey: false
 } )

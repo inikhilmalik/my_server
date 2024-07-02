@@ -61,10 +61,10 @@ approvalRouter.patch("/update/:id", async (req, res) => {
 
 approvalRouter.delete("/delete/:id", async (req, res) => {
     const { id } = req.params;
-    console.log(id)
+    console.log(id,"kakkaak")
     try {
-        await approvalModal.findByIdAndDelete({ projectId: id });
-        res.send("note is deleted")
+        await approvalModal.findByIdAndDelete({ pro: id });
+        res.send("approval is deleted")
     } catch (err) {
         res.send({ "err": err.message })
     }

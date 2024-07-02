@@ -37,10 +37,10 @@ noteNotificationRouter.patch("/update/:id", async (req, res) => {
 
 noteNotificationRouter.delete("/delete/:id", async (req, res) => {
     const { id } = req.params;
-    console.log(id)
+    // console.log(id,"opopp}}}}")
     try {
         await NoteNotificationModal.findByIdAndDelete({ _id: id });
-        res.send("note is deleted")
+        res.send("note notification is deleted")
     } catch (err) {
         res.send({ "err": err.message })
     }
