@@ -55,22 +55,46 @@ dataRouter.post("/updateData/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id)
     // console.log(req.body, "body/....../")
-    try {
-        if (id) {
-            await dataModal.deleteMany({ projectID: id })
-            const checkData = await dataModal.find({ projectID: id });
-            console.log(checkData, "checkDataaaaa")
-            if(checkData.length==0){
-                await dataModal.insertMany(req.body);
-            }
-            res.send("updation")
-        }
-        else {
-            res.send("Something went wrong try again later")
-        }
-    } catch (err) {
-        res.send({ "err": err.message })
+    if (id) {
+
+        dataModal.deleteMany({ projectID: id }).then(() => {
+            dataModal.find({ projectID: id }).then((data) => {
+                console.log(data, "09090909aaaa", data.length)
+                if (data.length == 0) {
+                    dataModal.insertMany(req.body)
+                        .then(() => {
+                            res.send("updation")
+                        })
+                        .catch((err) => {
+                            res.send({ "err": err.message })
+                        })
+                }
+                
+            })
+                .catch((err) => {
+                    res.send({ "err": err.message })
+                })
+        }).catch((err) => {
+            res.send({ "err": err.message })
+        })
     }
+
+    // try {
+    //     if (id) {
+    //         await dataModal.deleteMany({ projectID: id })
+    //         const checkData = await dataModal.find({ projectID: id });
+    //         console.log(checkData, "checkDataaaaa")
+    //         if (checkData.length == 0) {
+    //             await dataModal.insertMany(req.body);
+    //         }
+    //         res.send("updation")
+    //     }
+    //     else {
+    //         res.send("Something went wrong try again later")
+    //     }
+    // } catch (err) {
+    //     res.send({ "err": err.message })
+    // }
 })
 
 dataRouter.post("/insertData", async (req, res) => {
